@@ -1,0 +1,8 @@
+.todoList{
+    padding: 0 3rem;
+    transform: translateY(-3rem);
+
+    & div:last-child{
+        border-bottom: none;
+    }
+}

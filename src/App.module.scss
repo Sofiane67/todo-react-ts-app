@@ -1,0 +1,14 @@
+@import "./sass/index.scss";
+
+.app {
+  height: 100%;
+
+  &--light{
+    background-color: $color-light-theme-gray-2;
+  }
+
+  &--dark{
+    background-color: $color-dark-theme-gray-6;
+  }
+
+}

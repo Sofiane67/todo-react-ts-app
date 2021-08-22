@@ -1,13 +1,16 @@
-import{ Fragment } from 'react';
-import './App.css';
 import Header from './components/Header/Header';
+import TodoList from './components/TodoList/TodoList';
+import classes from "./App.module.scss";
+import { useSelector } from 'react-redux';
 
-function App() {
+const App = () => {
+  const {color} = useSelector((store:any) => store.theme);
 
   return (
-    <Fragment>
+    <div className={`${classes.app} ${classes[`app--${color}`]}`}>
       <Header/>
-    </Fragment>
+      <TodoList/>
+    </div>
   );
 }
 

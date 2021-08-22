@@ -1,0 +1,16 @@
+@import "../../sass/index.scss";
+
+.crossIcon{
+    width: 2rem;
+    height: 2rem;
+    margin-left: auto;
+    margin-right: 2rem;
+
+    &--light{
+        fill: $color-light-theme-gray-5
+    }
+
+    &--dark{
+        fill: $color-dark-theme-gray-2;
+    }
+}

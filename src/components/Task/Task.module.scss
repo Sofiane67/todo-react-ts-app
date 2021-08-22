@@ -1,0 +1,15 @@
+@import "../../sass/index.scss";
+
+.task{
+    display: flex;
+    padding: 2rem 0;
+    border-bottom: solid 1px;
+
+    &--light{
+        border-color: $color-light-theme-gray-3;
+    }
+
+    &--dark{
+        border-color: $color-dark-theme-gray-4;
+    }
+}

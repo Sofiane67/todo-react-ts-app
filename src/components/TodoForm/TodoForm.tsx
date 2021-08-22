@@ -1,15 +1,34 @@
-import { FC } from "react";
+import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Wrapper from "../Wrapper/Wrapper";
 import CheckboxWrapper from "../CheckboxWrapper/CheckboxWrapper";
 import classes from "./TodoForm.module.scss";
+import TaskModel from "../models/task";
+import { addNewTask } from "../../redux/actions/tasks/action";
 
 const TodoForm: FC = (props) => {
+    const dispatch = useDispatch();
+    const {color} = useSelector((store:any) => store.theme);
+    const [task, setTask] = useState<string>("");
+
+    const getInputValueHandler = (e:ChangeEvent<HTMLInputElement>) => {
+        setTask(e.target.value)
+    }
+
+    const addTaskHandler = (e:FormEvent) => {
+        e.preventDefault();
+        dispatch(addNewTask(new TaskModel(task)));
+        setTask("");
+    }
+
     return (
         <Wrapper>
-            <CheckboxWrapper/>
-            <form className={classes.todoForm}>
-                <input type="text" placeholder="Ajouter une nouvelle tâche..." className={classes["todoForm__input"]}/>
-            </form>
+            <div className={classes.todoForm}>
+                <CheckboxWrapper/>
+                <form className={classes["todoForm__form"]} onSubmit={addTaskHandler}>
+                    <input type="text" placeholder="Ajouter une nouvelle tâche..." value={task} className={`${classes["todoForm__input"]} ${classes[`todoForm__input--${color}`]}`} onChange={getInputValueHandler}/>
+                </form>
+            </div>
         </Wrapper>
     )
 }

@@ -13,4 +13,11 @@ body {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 1.8rem;
   font-weight: 400;
+  display: flex;
+  min-height: 100vh;
+  height: 100%;
+}
+
+#root{
+  align-items: stretch;
 }

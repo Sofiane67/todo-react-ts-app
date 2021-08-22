@@ -4,6 +4,7 @@ import { combineReducers, createStore,applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools} from "redux-devtools-extension";
 import { theme } from "./reducers/theme/reducer";
+import { tasks } from "./reducers/tasks/reducer";
 
 const migrations = {
     1: (state:any) => ({
@@ -21,6 +22,7 @@ const persistConfig = {
 
 const reducers = () => combineReducers({
     theme,
+    tasks
 });
 
 const persistReducerInit = persistReducer(persistConfig, reducers());

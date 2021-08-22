@@ -1,5 +1,5 @@
 import { FC, useState, useEffect, ChangeEvent } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import TodoForm from "../TodoForm/TodoForm";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import classes from "./Header.module.scss";
