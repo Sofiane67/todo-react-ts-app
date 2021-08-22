@@ -1,0 +1,16 @@
+@import "../../sass/index.scss";
+
+.todoForm{
+    flex: 1;
+    height: 100%;
+    display: flex;
+
+    &__input{
+        align-self: stretch;
+        width: 100%;
+        background-color: transparent;
+        border: 0;
+        outline: none;
+        caret-color: $color-bright-blue;
+    }
+}

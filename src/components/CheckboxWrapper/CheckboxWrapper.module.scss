@@ -1,0 +1,17 @@
+@import "../../sass/index.scss";
+
+.checkboxWrapper{
+    width: 2rem;
+    height: 2rem;
+    border: solid 2px;
+    border-radius: 100%;
+    margin: 0 2rem;
+
+    &--light{
+        border-color: $color-light-theme-gray-3;
+    }
+
+    &--dark{
+        border-color: $color-dark-theme-gray-4;
+    }
+}
