@@ -1,6 +1,8 @@
 import storage from "redux-persist/lib/storage";
 import {persistReducer, persistStore, createMigrate} from "redux-persist";
-import { combineReducers, createStore} from "redux";
+import { combineReducers, createStore,applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools} from "redux-devtools-extension";
 import { theme } from "./reducers/theme/reducer";
 
 const migrations = {
@@ -11,18 +13,21 @@ const migrations = {
 
 const persistConfig = {
     key: "root",
-    blacklist: [],
+    blacklist: ["theme"],
     storage,
     version: 1,
     migrate: createMigrate(migrations, {debug: true})
 }
 
 const reducers = () => combineReducers({
-    theme: theme,
+    theme,
 });
 
 const persistReducerInit = persistReducer(persistConfig, reducers());
 
-export const store = createStore(persistReducerInit);
+export const store = createStore(
+    persistReducerInit,
+    composeWithDevTools(applyMiddleware(thunk))
+);
 
 export const PersistStoreFct = (store: any) => persistStore(store);
