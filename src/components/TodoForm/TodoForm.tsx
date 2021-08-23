@@ -24,7 +24,7 @@ const TodoForm: FC = (props) => {
     return (
         <Wrapper>
             <div className={classes.todoForm}>
-                <CheckboxWrapper/>
+                <div className={`${classes["todoForm__circle"]} ${classes[`todoForm__circle--${color}`]}`}></div>
                 <form className={classes["todoForm__form"]} onSubmit={addTaskHandler}>
                     <input type="text" placeholder="Ajouter une nouvelle tâche..." value={task} className={`${classes["todoForm__input"]} ${classes[`todoForm__input--${color}`]}`} onChange={getInputValueHandler}/>
                 </form>

@@ -35,16 +35,26 @@ const Task: FC<{
             dispatch(updateTask(tasks));
         }
 
-    },[idTask, tasks, dispatch,activeTask])
+    },[idTask, tasks, dispatch,activeTask]);
+
+    let classIconCheck = classes["task__icon-check"];
+    classIconCheck += !activeTask?` ${classes["task__icon-check--completed"]}`:"";
+
+    let classTaskText = classes["task__text"];
+    classTaskText += !activeTask?` ${classes["task__text--completed"]}`:"";
 
 
     return(
         <div className={`${classes.task} ${classes[`task--${color}`]}`}>
-            <CheckboxWrapper>
-                <input type="checkbox" id={props.id} className={classes["task__checkbox"]} onChange={completeTaskHandler}/>
-                <img src={iconCheck} alt="icon check" className={classes["task__icon-check"]}/>
-            </CheckboxWrapper>
-            <label htmlFor={props.id} className={`${classes["task__text"]} ${!activeTask?classes["task__text--completed"]:""}`} data-id={props.id}>{props.task}</label>
+            <label htmlFor={props.id}>
+                <CheckboxWrapper active={activeTask}>
+                    <input type="checkbox" id={props.id} className={classes["task__checkbox"]} onChange={completeTaskHandler}/>
+                    <img src={iconCheck} alt="icon check" className={classIconCheck}/>
+                </CheckboxWrapper>
+            </label>
+            <label htmlFor={props.id} className={classTaskText} data-id={props.id}>
+                {props.task}
+            </label>
             <CrossIcon/>
         </div>
     )

@@ -15,6 +15,7 @@
     }
 
     &__text{
+        cursor: pointer;
         &--completed{
             text-decoration: line-through;
         }
@@ -25,7 +26,12 @@
     }
 
     &__icon-check{
-        width: 1rem;
-        height: 1rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        display: none;
+
+        &--completed{
+            display: block;
+        }
     }
 }

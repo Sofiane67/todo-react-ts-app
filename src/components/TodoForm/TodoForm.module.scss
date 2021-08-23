@@ -12,6 +12,22 @@
         display: flex;
     }
 
+    &__circle{
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 100%;
+        margin: 0 2rem;
+        border: solid 3px;
+
+        &--light{
+            border-color: $color-light-theme-gray-3;
+        }
+    
+        &--dark{
+            border-color: $color-dark-theme-gray-4;
+        }
+    }
+
     &__input{
         align-self: stretch;
         width: 100%;
