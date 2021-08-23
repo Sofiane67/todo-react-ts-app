@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import Task from '../Task/Task';
 import Wrapper from "../Wrapper/Wrapper";
@@ -10,7 +10,7 @@ const TodoList: FC = (props) => {
         <div className={classes.todoList}>
             <Wrapper>
                 {
-                    tasks.map((task:{id: string, task: string}) => <Task key={task.id} id={task.id} task={task.task}/>)
+                    tasks.map((task:{id: string, task: string, active:boolean}) => <Task key={task.id} id={task.id} task={task.task} active={task.active}/>)
                 }
             </Wrapper>
         </div>

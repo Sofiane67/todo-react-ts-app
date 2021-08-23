@@ -1,7 +1,7 @@
-import { ADD_NEW_TASK } from "../../actions/tasks/types";
+import { ADD_NEW_TASK, COMPLETE_TASK } from '../../actions/tasks/types';
 const initState: object[] = []; 
 
-export const tasks = (state = initState, action: {type: string, value: {}}) => {
+export const tasks = (state = initState, action: {type: string, value: {}|object[]}) => {
     let newState;
     switch (action.type) {
         case ADD_NEW_TASK:
@@ -10,10 +10,11 @@ export const tasks = (state = initState, action: {type: string, value: {}}) => {
                 action.value
             ]
             break;
-    
+        case COMPLETE_TASK:
+            newState = action.value;
+            break;
         default:
             return state;
     }
-    console.log(newState)
     return newState
 }
