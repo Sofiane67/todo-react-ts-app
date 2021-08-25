@@ -6,11 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
 import { PersistStoreFct, store } from './redux/index';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={PersistStoreFct(store)}>
-      <App />
+      <DndProvider backend={HTML5Backend}>
+        <App />
+      </DndProvider>
     </PersistGate>
   </Provider>,
   document.getElementById('root')

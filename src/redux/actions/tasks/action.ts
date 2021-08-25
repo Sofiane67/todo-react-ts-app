@@ -1,15 +1,12 @@
 import { ADD_NEW_TASK, COMPLETE_TASK, DELETE_TASK } from './types';
 import { updateStorage } from '../../../utils/helpers';
+import TaskModel from '../../../components/models/task';
 
 
-export const addNewTask = (newTask: {id: string, task: string, active: boolean}) => {
+export const addNewTask = (newTask: TaskModel) => {
     return (dispatch: (action: {
         type: string,
-        value : {
-            id: string,
-            task: string,
-            active: boolean
-        }
+        value : TaskModel
     }) => void) => {
         dispatch({
             type: ADD_NEW_TASK,
@@ -18,11 +15,11 @@ export const addNewTask = (newTask: {id: string, task: string, active: boolean})
     }
 };
 
-export const updateTask = (tasksArray: object[]) => {
+export const updateTask = (tasksArray: TaskModel[]) => {
     return (dispatch:(action:{
         type: string,
-        value: object[]
-    }) => object[]) => {
+        value: TaskModel[]
+    }) => TaskModel[]) => {
         updateStorage(tasksArray);
         dispatch({
             type: COMPLETE_TASK,
@@ -31,11 +28,11 @@ export const updateTask = (tasksArray: object[]) => {
     }
 }
 
-export const deleteTask = (tasksArray: [{id: string, task: string, active: boolean}]) => {
+export const deleteTask = (tasksArray: TaskModel[]) => {
     return (dispatch: (action:{
         type: string,
-        value: object[]
-    }) => object[]) => {
+        value: TaskModel[]
+    }) => TaskModel[]) => {
         updateStorage(tasksArray);
         dispatch({
             type: DELETE_TASK,

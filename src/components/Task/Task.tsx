@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, useEffect, useState,MouseEvent} from "react";
+import {ChangeEvent, FC, useEffect, useState,MouseEvent, useRef} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import CheckboxWrapper from "../CheckboxWrapper/CheckboxWrapper";
 import CrossIcon from "../CrossIcon/CrossIcon";
@@ -7,28 +7,38 @@ import { updateTask, deleteTask } from '../../redux/actions/tasks/action';
 import { updateActiveTask, taskToDelete } from "../../utils/helpers";
 import { storageIsUpdated } from "../../redux/actions/localstorage/action";
 import iconCheck from "./Icon/icon-check.svg";
+import { DropTargetMonitor, useDrag, useDrop } from "react-dnd";
+import { XYCoord } from "react-dnd";
+import useDragAndDrop from '../../hooks/use-dragAndDrop';
+
 
 const Task: FC<{
-    id: string,
+    id: number,
     task: string,
-    active: boolean
+    active: boolean,
+    moveTask: (dragIndex: number, hoverIndex: number) => void,
+    index: number
 }>= (props) => {
 
     const dispatch = useDispatch();
     const {color} = useSelector((store: any) => store.theme);
     const {tasks} = useSelector((store: any) => store);
-    const [idTask, setIdTask] = useState<string>("");
+    const [idTask, setIdTask] = useState<number>(0);
     const [activeTask, setActiveTask] = useState<boolean>(props.active);
     const [isDelete, setIsDelete] = useState<boolean>(false);
+    const ref = useRef<HTMLDivElement>(null);
+
+    const {drag, drop} = useDragAndDrop(props, ref);
+    drag(drop(ref));
 
     const completeTaskHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setActiveTask(currentState => !currentState);
-        setIdTask(e.target.id);
+        setIdTask(Number(e.target.id));
     }
 
     const deleteTaskHandler = (e:MouseEvent<HTMLButtonElement>) => {
         if(e.currentTarget.dataset.id){
-            setIdTask(e.currentTarget.dataset.id)
+            setIdTask(Number(e.currentTarget.dataset.id))
         }
         setIsDelete(true);
         dispatch(storageIsUpdated(true));
@@ -38,12 +48,10 @@ const Task: FC<{
         const [taskToUpdate] = updateActiveTask(tasks,idTask,activeTask)
 
         if(taskToUpdate){
-            console.log(isDelete)
             dispatch(updateTask(tasks));
         }
 
         if(isDelete){
-            console.log(isDelete)
             taskToDelete(tasks,idTask);
             dispatch(deleteTask(tasks));
             setIsDelete(false);
@@ -58,16 +66,16 @@ const Task: FC<{
     let classTaskText = classes["task__text"];
     classTaskText += !activeTask?` ${classes["task__text--completed"]}`:"";
 
-
+    
     return(
-        <div className={`${classes.task} ${classes[`task--${color}`]}`}>
-            <label htmlFor={props.id}>
+        <div className={`${classes.task} ${classes[`task--${color}`]}`} ref={ref}>
+            <label htmlFor={`${props.id}`}>
                 <CheckboxWrapper active={activeTask}>
-                    <input type="checkbox" id={props.id} className={classes["task__checkbox"]} onChange={completeTaskHandler}/>
+                    <input type="checkbox" id={`${props.id}`} className={classes["task__checkbox"]} onChange={completeTaskHandler}/>
                     <img src={iconCheck} alt="icon check" className={classIconCheck}/>
                 </CheckboxWrapper>
             </label>
-            <label htmlFor={props.id} className={classTaskText}>
+            <label htmlFor={`${props.id}`} className={classTaskText}>
                 {props.task}
             </label>
             <button className={classes["task__delete-btn"]} data-id={props.id} onClick={deleteTaskHandler}>

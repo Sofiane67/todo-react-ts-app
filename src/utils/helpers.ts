@@ -1,6 +1,8 @@
 import storage from "redux-persist/lib/storage";
+import TaskModel from '../components/models/task';
+import update from "immutability-helper"
 
-export const updateStorage = (tasksArray: object[]):void => {
+export const updateStorage = (tasksArray: TaskModel[]):void => {
     storage.getItem("persist:root")
         .then(dataStored => {
             if(dataStored){
@@ -11,8 +13,8 @@ export const updateStorage = (tasksArray: object[]):void => {
         }); 
 }
 
-export const updateActiveTask = (tasks:[{id: string, task: string, active: boolean}], idTask:string, activeTask:boolean) => {
-    return tasks.filter((task:{id: string, task:string, active:boolean}) => {
+export const updateActiveTask = (tasks: TaskModel[], idTask:number, activeTask:boolean) => {
+    return tasks.filter((task:TaskModel) => {
             if(task.id === idTask){
                 task.active = activeTask;
             }
@@ -20,20 +22,34 @@ export const updateActiveTask = (tasks:[{id: string, task: string, active: boole
         });
 }
 
-export const taskToDelete = (tasks:[{id: string, task: string, active: boolean}], idTask:string) => {
-    const [taskToDelete] = tasks.filter((task:{id:string, task:string, active: boolean}) => task.id === idTask);
+export const taskToDelete = (tasks:TaskModel[], idTask:number) => {
+    const [taskToDelete] = tasks.filter((task:TaskModel) => task.id === idTask);
     const indexTask = tasks.indexOf(taskToDelete);
     tasks.splice(indexTask,1);
     return tasks;
 }
 
-export const filterTasks = (tasks:[{id: string, task: string, active:boolean}], filter: string) => {
+export const filterTasks = (tasks:TaskModel[], filter: string) => {
     switch (filter) {
         case "Active":
-            return tasks.filter((task: {id: string, task: string, active:boolean}) => task.active === true);
+            return tasks.filter((task: TaskModel) => task.active === true);
         case "Completed":
-            return tasks.filter((task: {id: string, task: string, active:boolean}) => task.active === false);      
+            return tasks.filter((task: TaskModel) => task.active === false);      
         default:
             return tasks;;
+    }
+}
+
+
+
+export const moveTaskHelper = (tasks:TaskModel[], filterFct:Function) => {
+    return (dragIndex: number,hoverIndex: number) => {
+        const dragTask = tasks[dragIndex];
+        filterFct(update(tasks, {
+            $splice: [
+                [dragIndex,1],
+                [hoverIndex,0,dragTask]
+            ]
+        }));
     }
 }

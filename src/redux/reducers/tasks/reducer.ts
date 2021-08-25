@@ -2,7 +2,6 @@ import { ADD_NEW_TASK, COMPLETE_TASK, DELETE_TASK } from '../../actions/tasks/ty
 const initState: object[] = []; 
 
 export const tasks = (state = initState, action: {type: string, value: {}|object[]}) => {
-    console.log(action)
     let newState;
     switch (action.type) {
         case ADD_NEW_TASK:
