@@ -26,3 +26,14 @@ export const taskToDelete = (tasks:[{id: string, task: string, active: boolean}]
     tasks.splice(indexTask,1);
     return tasks;
 }
+
+export const filterTasks = (tasks:[{id: string, task: string, active:boolean}], filter: string) => {
+    switch (filter) {
+        case "Active":
+            return tasks.filter((task: {id: string, task: string, active:boolean}) => task.active === true);
+        case "Completed":
+            return tasks.filter((task: {id: string, task: string, active:boolean}) => task.active === false);      
+        default:
+            return tasks;;
+    }
+}

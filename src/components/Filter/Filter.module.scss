@@ -1,0 +1,29 @@
+@import "../../sass/index.scss";
+
+
+.filter{
+    display: flex;
+    padding: 0 3rem;
+
+    &__filters-box{
+        flex: 1;
+        height: 100%;
+        align-self: stretch;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__btn{
+        font-family: inherit;
+        font-size: inherit;
+        background-color: transparent;
+        border: 0;
+        color: currentColor;
+        margin: 0 1rem;
+        cursor: pointer;
+        &--active{
+            color: $color-bright-blue;
+        }
+    }
+}

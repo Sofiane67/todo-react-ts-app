@@ -24,7 +24,6 @@ const Task: FC<{
     const completeTaskHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setActiveTask(currentState => !currentState);
         setIdTask(e.target.id);
-        setIsDelete(true);
     }
 
     const deleteTaskHandler = (e:MouseEvent<HTMLButtonElement>) => {
@@ -39,10 +38,12 @@ const Task: FC<{
         const [taskToUpdate] = updateActiveTask(tasks,idTask,activeTask)
 
         if(taskToUpdate){
+            console.log(isDelete)
             dispatch(updateTask(tasks));
         }
 
         if(isDelete){
+            console.log(isDelete)
             taskToDelete(tasks,idTask);
             dispatch(deleteTask(tasks));
             setIsDelete(false);
