@@ -1,7 +1,6 @@
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Wrapper from "../Wrapper/Wrapper";
-import CheckboxWrapper from "../CheckboxWrapper/CheckboxWrapper";
 import classes from "./TodoForm.module.scss";
 import TaskModel from "../models/task";
 import { addNewTask } from "../../redux/actions/tasks/action";

@@ -20,3 +20,14 @@ $color-dark-theme-gray-4: hsl(237, 14%, 26%);
 $color-dark-theme-gray-5: hsl(235, 24%, 19%);
 $color-dark-theme-gray-6 : hsl(235, 21%, 11%);
 $color-dark-theme-gray-hover:hsl(236, 33%, 92%);
+
+//MEDIA QUERIES
+$breakpoints:(
+    bp-1024: 64.0625em
+);
+
+@mixin media-queries($breakpoint){
+    @media only screen and (min-width: $breakpoint){
+        @content
+    }
+}

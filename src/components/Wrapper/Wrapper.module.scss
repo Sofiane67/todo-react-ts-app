@@ -3,7 +3,7 @@
 .wrapper{
     border-radius: 0.5rem;
     width: 100%;
-    height: auto;
+    min-height: 5rem;
 
     &--light{
         background-color: $color-white;

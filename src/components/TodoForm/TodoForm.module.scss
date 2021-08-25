@@ -13,8 +13,8 @@
     }
 
     &__circle{
-        width: 3.8rem;
-        height: 3.8rem;
+        width: 3.4rem;
+        height: 3.4rem;
         border-radius: 100%;
         margin: 0 2rem;
         border: solid 3px;
@@ -35,6 +35,8 @@
         border: 0;
         outline: none;
         caret-color: $color-bright-blue;
+        font-family: inherit;
+        font-size: inherit;
         
         &--light{
             color : $color-light-theme-gray-5;

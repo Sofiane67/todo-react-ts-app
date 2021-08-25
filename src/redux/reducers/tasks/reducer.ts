@@ -1,4 +1,4 @@
-import { ADD_NEW_TASK, COMPLETE_TASK } from '../../actions/tasks/types';
+import { ADD_NEW_TASK, COMPLETE_TASK, DELETE_TASK } from '../../actions/tasks/types';
 const initState: object[] = []; 
 
 export const tasks = (state = initState, action: {type: string, value: {}|object[]}) => {
@@ -11,6 +11,10 @@ export const tasks = (state = initState, action: {type: string, value: {}|object
             ]
             break;
         case COMPLETE_TASK:
+            newState = action.value;
+            break;
+
+        case DELETE_TASK:
             newState = action.value;
             break;
         default:

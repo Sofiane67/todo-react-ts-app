@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools} from "redux-devtools-extension";
 import { theme } from "./reducers/theme/reducer";
 import { tasks } from "./reducers/tasks/reducer";
+import { localStorage } from "./reducers/localstorage/reducer";
 
 const migrations = {
     1: (state:any) => ({
@@ -14,7 +15,7 @@ const migrations = {
 
 const persistConfig = {
     key: "root",
-    blacklist: ["theme"],
+    blacklist: ["theme", "localStorage"],
     storage,
     version: 1,
     migrate: createMigrate(migrations, {debug: true})
@@ -22,7 +23,8 @@ const persistConfig = {
 
 const reducers = () => combineReducers({
     theme,
-    tasks
+    tasks,
+    localStorage
 });
 
 const persistReducerInit = persistReducer(persistConfig, reducers());
