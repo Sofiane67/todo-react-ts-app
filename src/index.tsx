@@ -8,11 +8,15 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { PersistStoreFct, store } from './redux/index';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import {TouchBackend} from "react-dnd-touch-backend";
+
+const windowWidth = window.innerWidth;
+const backend = windowWidth > 1024 ? HTML5Backend : TouchBackend;
 
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={PersistStoreFct(store)}>
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={backend}>
         <App />
       </DndProvider>
     </PersistGate>
