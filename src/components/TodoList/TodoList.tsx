@@ -10,13 +10,17 @@ import TaskModel from '../models/task';
 const TodoList: FC<{filter: string}> = (props) => {
     const {tasks} = useSelector((store: any) => store);
     const [tasksFiltred, setTasksFiltred] = useState<TaskModel[]>(tasks);
-    const moveTask = useCallback(moveTaskHelper(tasksFiltred, setTasksFiltred), [tasksFiltred,setTasksFiltred])
+    const moveTask = useCallback(moveTaskHelper(tasksFiltred, setTasksFiltred), [tasksFiltred,setTasksFiltred]);
 
     useEffect(() => {
         const filtred = filterTasks(tasks, props.filter)
         setTasksFiltred(filtred);
     }, [tasks, props.filter])
-    updateStorage(tasksFiltred);
+
+    if(props.filter === "All"){
+        updateStorage(tasksFiltred);
+    }
+    
     return (
         <div className={classes.todoList}>
             <Wrapper>

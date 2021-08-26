@@ -20,14 +20,18 @@ const Filter : FC <{onFilter : (filter: string) => void}> = (props) => {
     ];
 
     const filterHandler = (e: MouseEvent) => {
+        
         const button: HTMLButtonElement = e.target ! as HTMLButtonElement;
         const btnList = document.querySelectorAll(`.${classes["filter__btn"]}`)
-        btnList.forEach(btn => {
-            btn.classList.remove(classes["filter__btn--active"])
-        })
-        button.classList.add(classes["filter__btn--active"]);
-        
-        if(button.dataset.filter) props.onFilter(button.dataset.filter);
+        if(button !== e.currentTarget){
+            btnList.forEach(btn => {
+                btn.classList.remove(classes["filter__btn--active"])
+            })
+            button.classList.add(classes["filter__btn--active"]);
+            
+            if(button.dataset.filter) props.onFilter(button.dataset.filter);
+        }
+
     }
 
     return (

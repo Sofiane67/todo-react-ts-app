@@ -1,6 +1,10 @@
 .todoList{
     padding: 0 3rem;
     transform: translateY(-3rem);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: -3rem;
 
     & div:last-child{
         border-bottom: none;

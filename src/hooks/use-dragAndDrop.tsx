@@ -19,7 +19,7 @@ const useDragAndDrop= (props: {
         accept: "task",
         collect(monitor){
             return {
-                handlerId:monitor.getHandlerId(),
+                handlerId: monitor.getHandlerId(),
             }
         },
         hover(task:DragTask, monitor: DropTargetMonitor){

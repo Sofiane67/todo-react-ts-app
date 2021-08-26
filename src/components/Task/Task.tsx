@@ -7,8 +7,6 @@ import { updateTask, deleteTask } from '../../redux/actions/tasks/action';
 import { updateActiveTask, taskToDelete } from "../../utils/helpers";
 import { storageIsUpdated } from "../../redux/actions/localstorage/action";
 import iconCheck from "./Icon/icon-check.svg";
-import { DropTargetMonitor, useDrag, useDrop } from "react-dnd";
-import { XYCoord } from "react-dnd";
 import useDragAndDrop from '../../hooks/use-dragAndDrop';
 
 
