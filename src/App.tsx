@@ -7,8 +7,7 @@ import Filter from './components/Filter/Filter';
 
 const App = () => {
   const {color} = useSelector((store:any) => store.theme);
-  const {active, completed} = useSelector((store: any) => store.tasks);
-  const allTasks = active.concat(completed);
+  const {allTasks} = useSelector((store: any) => store.tasks);
   const [filter, setFilter] = useState<string>("");
 
   const getFilterType = (filter: string) => {
@@ -18,7 +17,7 @@ const App = () => {
   return (
     <div className={`${classes.app} ${classes[`app--${color}`]}`}>
       <Header/>
-      {allTasks.length>0 && <TodoList filter={filter}/> } 
+      {allTasks && allTasks.length > 0 && <TodoList filter={filter}/> } 
       <Filter onFilter={getFilterType}/>
     </div>
   );

@@ -4,11 +4,11 @@ import TaskModel from '../../../components/models/task';
 export const addNewTask = (newTask: TaskModel) => {
     return (dispatch: (action: {
         type: string,
-        value : TaskModel
+        value : TaskModel[]
     }) => void) => {
         dispatch({
             type: ADD_NEW_TASK,
-            value: {...newTask}
+            value: [newTask]
         })
     }
 };

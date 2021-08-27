@@ -8,8 +8,7 @@ import { moveTaskHelper,sortObjectArray } from '../../utils/helpers';
 
 const TodoList: FC<{filter: string}> = (props) => {
     const {tasks} = useSelector((store: any) => store);
-    const {active, completed} = useSelector((store: any) => store.tasks);
-    const allTasks = active.concat(completed);
+    const {active, completed, allTasks} = useSelector((store: any) => store.tasks);
     const [tasksFiltred, setTasksFiltred] = useState<TaskModel[]>(allTasks);
     const moveTask = useCallback(moveTaskHelper(tasksFiltred, setTasksFiltred), [tasksFiltred, setTasksFiltred]);
     
@@ -22,10 +21,10 @@ const TodoList: FC<{filter: string}> = (props) => {
                 setTasksFiltred(sortObjectArray(completed))
                 break;
             default:
-                setTasksFiltred(sortObjectArray(active.concat(completed)));
+                setTasksFiltred(sortObjectArray(allTasks));
                 break
         }
-    }, [props.filter, active, completed, tasks]); 
+    }, [props.filter, active, completed, tasks,allTasks]); 
 
     return (
         <div className={classes.todoList}>

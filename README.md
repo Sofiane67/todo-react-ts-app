@@ -3,7 +3,8 @@
 # TODO LIST
 
 ### Demo
-    URL : https://todo-react-ts-app.vercel.app/
+
+URL : https://todo-react-ts-app-sofiane67.vercel.app/
 
 ### Technologie utilisé
     React - Redux - TypeScript - Sass - React DnD
