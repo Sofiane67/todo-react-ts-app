@@ -1,21 +1,46 @@
-import { ADD_NEW_TASK, COMPLETE_TASK, DELETE_TASK } from '../../actions/tasks/types';
-const initState: object[] = []; 
+import { ADD_NEW_TASK, COMPLETE_TASK, REACTIVATE_STATE, DELETE_ACTIVE_TASK, DELETE_COMPLETE_TASK } from '../../actions/tasks/types';
+import TaskModel from "../../../components/models/task";
 
-export const tasks = (state = initState, action: {type: string, value: {}|object[]}) => {
+const initState: {
+    active: TaskModel[],
+    completed: TaskModel[]
+} = {
+    active: [],
+    completed: []
+}; 
+
+export const tasks = (state = initState, action: {type: string, value: {}|object[]|number}) => {
     let newState;
     switch (action.type) {
         case ADD_NEW_TASK:
-            newState = [
+            newState = {
                 ...state,
-                action.value
-            ]
+                active: [...state.active, action.value]
+            }
             break;
         case COMPLETE_TASK:
-            newState = action.value;
+            newState = {
+                ...state,
+                completed: [...state.completed, action.value]
+            }
             break;
-
-        case DELETE_TASK:
-            newState = action.value;
+        case REACTIVATE_STATE:
+            newState = {
+                ...state,
+                active: [...state.active, action.value]
+            }
+            break;
+        case DELETE_ACTIVE_TASK:
+            newState = {
+                ...state,
+                active: action.value
+            }
+            break;
+        case DELETE_COMPLETE_TASK:
+            newState = {
+                ...state,
+                completed: action.value
+            }
             break;
         default:
             return state;
