@@ -21,6 +21,6 @@ steps:
   displayName: 'npm install and build'
 - task: PublishBuildArtifacts@1
   inputs:
-      PathtoPublish: 'dist'
-      ArtifactName: 'drop/dist'
+      PathtoPublish: 'build'
+      ArtifactName: 'drop/build'
       publishLocation: 'Container'
